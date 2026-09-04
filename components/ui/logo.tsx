@@ -2,16 +2,18 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 // Intrinsic size of the source crop in public/brand — see that folder's
-// origin: cropped from the client-supplied logo (Downloads/levati-removebg-preview.png).
+// origin: cropped from the client-supplied logo (Downloads/levati-removebg-preview.png),
+// then recolored to solid navy-900 / white (alpha-preserving) so it matches
+// the site's token palette rather than the source file's own blue-to-lavender
+// gradient. Includes the "taste the difference." tagline.
 const WIDTH = 311;
-const HEIGHT = 88;
+const HEIGHT = 116;
 
 const SRC = {
-  color: "/brand/logo-mark.png",
-  // Alpha-preserving white recolor of the same crop, for the header's
-  // transparent-over-hero state where the brand blues would wash out
-  // against the hero's own blue gradient.
-  white: "/brand/logo-mark-white.png",
+  navy: "/brand/logo-navy.png",
+  // For the header's transparent-over-hero state and the navy footer, where
+  // the navy variant would have no contrast against its own background.
+  white: "/brand/logo-white.png",
 } as const;
 
 interface LogoProps {
@@ -19,15 +21,15 @@ interface LogoProps {
   className?: string;
 }
 
-function Logo({ variant = "color", className }: LogoProps) {
+function Logo({ variant = "navy", className }: LogoProps) {
   return (
     <Image
       src={SRC[variant]}
-      alt="Levati Water"
+      alt="Levati Water — taste the difference"
       width={WIDTH}
       height={HEIGHT}
       priority
-      className={cn("h-8 w-auto lg:h-9", className)}
+      className={cn("h-9 w-auto lg:h-11", className)}
     />
   );
 }

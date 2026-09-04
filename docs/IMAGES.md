@@ -92,13 +92,14 @@ utility class, not per-image.
   `--color-blue-300`, decreasing opacity outward). Do not use a stock photo for
   this; a raster ripple will not scale cleanly behind the hero.
 - **Logo** — supplied by the client as PNG (`Downloads/levati-removebg-preview.png`,
-  transparent background), not the SVG this doc originally asked for. Cropped
-  into `public/brand/`: `logo.png` (full lockup with tagline, for contexts with
-  room to breathe), `logo-mark.png` (wordmark only, for the nav bar), and
-  `logo-mark-white.png` (alpha-preserving white recolor of the mark, for the
-  header's transparent-over-hero state, where the brand blues wash out against
-  the hero's own blue gradient). `TODO(client)`: ask for a real SVG when
-  convenient — a raster crop is fine for now but won't scale as cleanly as a
-  vector at very large sizes (e.g. a print piece).
+  transparent background), not the SVG this doc originally asked for. The
+  source file's own blue-to-lavender gradient didn't match the token
+  palette, so `public/brand/` holds two alpha-preserving recolors of the
+  full lockup (wordmark + "taste the difference." tagline) instead of the
+  original: `logo-navy.png` (solid `--color-navy-900`, the default) and
+  `logo-white.png` (for the header's transparent-over-hero state and the
+  navy footer, where navy-on-navy would have no contrast). `TODO(client)`:
+  ask for a real SVG when convenient — a raster crop is fine for now but
+  won't scale as cleanly as a vector at very large sizes (e.g. a print piece).
 - **OG image** — generate at build time with `next/og`, 1200×630, gradient
   background plus logotype.

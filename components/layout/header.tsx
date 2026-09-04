@@ -72,7 +72,7 @@ function Header({ transparent }: HeaderProps) {
           href="/"
           className="outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
         >
-          <Logo variant={isSolid ? "color" : "white"} />
+          <Logo variant={isSolid ? "navy" : "white"} />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">

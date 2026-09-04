@@ -7,6 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { Container } from "./container";
 import { MobileNav } from "./mobile-nav";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/ui/logo";
 import { NAV_LINKS, PRODUCT_LINKS } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
@@ -69,13 +70,9 @@ function Header({ transparent }: HeaderProps) {
       <Container className="flex h-16 items-center justify-between lg:h-20">
         <Link
           href="/"
-          className={cn(
-            "font-heading text-h3 font-bold outline-none transition-colors duration-[var(--dur-micro)]",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2",
-            isSolid ? "text-navy-900" : "text-white"
-          )}
+          className="outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
         >
-          Levati Water
+          <Logo variant={isSolid ? "color" : "white"} />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">

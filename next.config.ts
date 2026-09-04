@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 
 // 301 (permanent) redirect map from old WordPress URLs — spec §6.
 const nextConfig: NextConfig = {
+  images: {
+    // docs/IMAGES.md — AVIF with WebP fallback, CLS controlled via explicit
+    // width/height on every <Image> rather than here.
+    formats: ["image/avif", "image/webp"],
+  },
   async redirects() {
     return [
       { source: "/about-us", destination: "/about", permanent: true },

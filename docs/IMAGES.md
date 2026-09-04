@@ -91,7 +91,14 @@ utility class, not per-image.
 - **Ripple graphic** — hand-authored SVG (concentric ellipses, stroke
   `--color-blue-300`, decreasing opacity outward). Do not use a stock photo for
   this; a raster ripple will not scale cleanly behind the hero.
-- **Logo** — `TODO(client)`. Needs an SVG. Build a text-mark placeholder in
-  Poppins 700 with a droplet glyph until it arrives.
+- **Logo** — supplied by the client as PNG (`Downloads/levati-removebg-preview.png`,
+  transparent background), not the SVG this doc originally asked for. Cropped
+  into `public/brand/`: `logo.png` (full lockup with tagline, for contexts with
+  room to breathe), `logo-mark.png` (wordmark only, for the nav bar), and
+  `logo-mark-white.png` (alpha-preserving white recolor of the mark, for the
+  header's transparent-over-hero state, where the brand blues wash out against
+  the hero's own blue gradient). `TODO(client)`: ask for a real SVG when
+  convenient — a raster crop is fine for now but won't scale as cleanly as a
+  vector at very large sizes (e.g. a print piece).
 - **OG image** — generate at build time with `next/og`, 1200×630, gradient
   background plus logotype.

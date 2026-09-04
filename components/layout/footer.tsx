@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "./container";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { Logo } from "@/components/ui/logo";
 import { PRODUCT_LINKS } from "@/lib/nav";
 
 const COMPANY_LINKS = [
@@ -34,7 +35,7 @@ function Footer() {
       <Container className="py-14 md:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="md:col-span-2 lg:col-span-1">
-            <p className="font-heading text-h3 font-bold">Levati Water</p>
+            <Logo variant="white" />
             <p className="mt-4 max-w-[32ch] text-body text-blue-100">
               Home and office water solutions across Johannesburg and Pretoria — bottled coolers,
               mains-fed coolers, reverse osmosis and branded water.

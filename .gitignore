@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+next-env.d.ts
+public/images/*.jpg
+!public/images/credits.json
+*.tsbuildinfo
+.DS_Store

@@ -33,6 +33,7 @@ export default function FreeTrialPage() {
 
       <Section>
         <Container>
+          <h2 className="sr-only">What&apos;s included</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {INCLUDED.map((item) => (
               <FeatureCard key={item.title} icon={item.icon} title={item.title}>

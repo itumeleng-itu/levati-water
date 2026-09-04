@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens — Levati Water
+   Source: docs/BUILD-SPEC.md §1–3
+   Rule: no hex values anywhere outside this file.
+   ========================================================================== */
+
+@theme {
+  /* --- Brand blues — pulled from the OMI reference --- */
+  --color-navy-900: #0a2540; /* nav pill, primary buttons, footer */
+  --color-navy-800: #0f3357; /* primary hover */
+  --color-blue-700: #12558c; /* section headings */
+  --color-blue-500: #3e93d0; /* heading rule, focus ring */
+  --color-blue-300: #a9d6f0; /* hero gradient mid-stop */
+  --color-blue-100: #dff0fb; /* product card image backdrop */
+  --color-blue-50: #f2f9fe;
+
+  /* --- Accent — Levati's own note, not in the reference.
+     Used only for purification/quality signals. Never for CTAs. --- */
+  --color-aqua-500: #17b3b8;
+
+  /* --- Neutrals --- */
+  --color-ink-900: #0c1922;
+  --color-ink-600: #5a6b7a; /* body copy */
+  --color-ink-400: #8a99a6; /* captions, placeholders — decorative only, never body text */
+  --color-line: #e3e9ee;
+  --color-surface: #f5f7f9; /* alternating section band */
+
+  /* --- Feedback --- */
+  --color-error: #c6373a;
+  --color-warn: #d08700;
+  --color-ok: #1e9e62;
+
+  /* --- Radii — two tiers plus xl for hero/feature imagery.
+     rounded-full (pill buttons) is Tailwind's built-in, no token needed. --- */
+  --radius-md: 12px; /* inputs, small chips */
+  --radius-lg: 20px; /* cards */
+  --radius-xl: 28px; /* hero and feature imagery */
+
+  /* --- Elevation --- */
+  --shadow-card: 0 2px 8px rgba(10, 37, 64, 0.06);
+  --shadow-hover: 0 10px 28px rgba(10, 37, 64, 0.12);
+  --shadow-nav: 0 1px 0 rgba(10, 37, 64, 0.08);
+
+  /* --- Type families.
+     --font-poppins / --font-inter are injected by next/font/google in
+     app/fonts.ts via the `variable` option — see that file. --- */
+  --font-heading: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+
+  /*
+   * --- Fluid type scale (clamp), computed between 375px and 1440px
+   * viewports — both are explicit QA breakpoints in spec §4. Recompute if
+   * those bounds change.
+   */
+  --text-display: clamp(2rem, 1.384rem + 2.629vw, 3.75rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.025em;
+
+  --text-h1: clamp(1.75rem, 1.398rem + 1.502vw, 2.75rem);
+  --text-h1--line-height: 1.15;
+  --text-h1--letter-spacing: -0.02em;
+
+  --text-h2: clamp(1.5rem, 1.192rem + 1.315vw, 2.375rem);
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.015em;
+
+  --text-h3: clamp(1.1875rem, 1.077rem + 0.47vw, 1.5rem);
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-lead: clamp(1rem, 0.934rem + 0.282vw, 1.1875rem);
+  --text-lead--line-height: 1.6;
+
+  --text-body: clamp(0.9375rem, 0.9155rem + 0.094vw, 1rem);
+  --text-body--line-height: 1.7;
+
+  --text-small: clamp(0.8125rem, 0.7905rem + 0.094vw, 0.875rem);
+  --text-small--line-height: 1.55;
+
+  --text-button: clamp(0.9375rem, 0.9155rem + 0.094vw, 1rem);
+  --text-button--line-height: 1;
+  --text-button--letter-spacing: 0.01em;
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/*
+ * Tokens below don't map to a Tailwind utility namespace, so they're plain
+ * custom properties, not @theme entries. Reach them with var(...) or an
+ * arbitrary-value utility, e.g. duration-[var(--dur-micro)].
+ */
+:root {
+  /* Gradients */
+  --grad-hero: linear-gradient(135deg, #dff0fb 0%, #a9d6f0 45%, #5aa7d9 100%);
+  --grad-card: linear-gradient(180deg, #dff0fb 0%, #bfe2f6 100%);
+
+  /* Motion durations */
+  --dur-micro: 150ms; /* hover, press, focus */
+  --dur-panel: 300ms; /* nav sheet, accordion */
+  --dur-reveal: 600ms; /* hero only */
+
+  /* Layout — spec §3. Tailwind's default spacing scale (4px base) already
+     matches the spec's spacing steps 4–128, so no override needed there. */
+  --container-max: 1200px;
+  --gutter: 20px;
+  --section-py: 56px;
+  --measure: 68ch;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+    --section-py: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 48px;
+    --section-py: 112px;
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light; /* no dark mode — see spec §1 */
+  }
+
+  body {
+    background: white;
+    color: var(--color-ink-900);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+  }
+
+  ::selection {
+    background: var(--color-blue-300);
+    color: var(--color-navy-900);
+  }
+}
+
+/* Motion budget is spec §3, exhaustively — one hero reveal on load plus
+   interaction feedback. Nothing else. This guard is non-negotiable. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

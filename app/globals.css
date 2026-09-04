@@ -149,6 +149,55 @@
   }
 }
 
+/* Nav sheet slide + accordion expand — both explicitly permitted as
+   "interaction feedback" under the motion budget in spec §3. */
+@keyframes sheet-overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes sheet-overlay-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes sheet-slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes sheet-slide-out-right {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes sheet-slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+}
+@keyframes sheet-slide-out-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
 /* Motion budget is spec §3, exhaustively — one hero reveal on load plus
    interaction feedback. Nothing else. This guard is non-negotiable. */
 @media (prefers-reduced-motion: reduce) {

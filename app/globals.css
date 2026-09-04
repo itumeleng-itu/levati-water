@@ -127,6 +127,16 @@
 @layer base {
   html {
     color-scheme: light; /* no dark mode — see spec §1 */
+    /* Scrollbar hidden (not just styled) so page width is identical whether
+       a page has enough content to scroll or not — a visible scrollbar on
+       tall pages but not short ones was making pages feel inconsistent
+       width to width. Scrolling itself is unaffected. */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* legacy Edge */
+  }
+
+  html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Chromium Edge */
   }
 
   body {

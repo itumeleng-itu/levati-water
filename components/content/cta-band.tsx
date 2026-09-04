@@ -10,7 +10,7 @@ interface CTABandProps {
 
 function CTABand({ heading, children, primaryCta, phone }: CTABandProps) {
   return (
-    <section className="bg-[image:var(--grad-hero)] py-14 md:py-16 lg:py-20">
+    <section data-header-theme="overlay" className="bg-[image:var(--grad-hero)] py-14 md:py-16 lg:py-20">
       <Container className="flex flex-col items-center gap-6 text-center">
         <h2 className="max-w-[24ch] text-h1 font-heading font-bold text-white">{heading}</h2>
         <p className="max-w-[var(--measure)] text-lead text-white/90">{children}</p>

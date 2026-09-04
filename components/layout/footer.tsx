@@ -11,7 +11,7 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy-900 text-white">
+    <footer data-header-theme="navy" className="bg-navy-900 text-white">
       <Container className="flex flex-col items-center gap-8 py-12 text-center md:py-14">
         <Logo variant="white" className="h-10 lg:h-12" />
 

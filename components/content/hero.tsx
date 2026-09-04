@@ -13,6 +13,7 @@ function reveal(delayMs: number) {
 function Hero() {
   return (
     <section
+      data-header-theme="overlay"
       className="relative -mt-16 min-h-[520px] overflow-hidden bg-[image:var(--grad-hero)] md:-mt-20 md:min-h-[480px] lg:min-h-[600px]"
     >
       <Container className="flex flex-col items-center gap-10 pb-14 pt-28 md:flex-row md:pb-16 md:pt-24 lg:pb-20 lg:pt-28">

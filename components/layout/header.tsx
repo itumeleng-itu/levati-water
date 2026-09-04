@@ -10,32 +10,44 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { NAV_LINKS, PRODUCT_LINKS } from "@/lib/nav";
 import { cn } from "@/lib/utils";
+import { HEADER_THEMES, type HeaderTheme } from "./header-theme";
 
-interface HeaderProps {
-  /**
-   * True for pages with a full-bleed hero the header should float over
-   * (spec §7.1) — starts transparent with white text, then solid after 40px
-   * of scroll. Defaults to auto-detecting the home page ("/"), since Header
-   * is rendered once in the root layout for every route. Pass explicitly if
-   * another page later gets a full-bleed hero too.
-   */
-  transparent?: boolean;
-}
-
-function Header({ transparent }: HeaderProps) {
+function Header() {
   const pathname = usePathname();
-  const isTransparentPage = transparent ?? pathname === "/";
-  const [scrolled, setScrolled] = React.useState(false);
-  const [productsOpen, setProductsOpen] = React.useState(false);
+  const headerRef = React.useRef<HTMLElement>(null);
   const productsRef = React.useRef<HTMLDivElement>(null);
 
+  // Home's hero has no data-header-theme measurement to go on for the very
+  // first frame (before scroll/resize fires), so seed a sensible guess —
+  // corrected immediately by the effect below on every other page.
+  const [theme, setTheme] = React.useState<HeaderTheme>(pathname === "/" ? "overlay" : "white");
+  const [productsOpen, setProductsOpen] = React.useState(false);
+
   React.useEffect(() => {
-    if (!isTransparentPage) return;
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isTransparentPage]);
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-header-theme]"));
+    if (!sections.length) return;
+
+    const headerHeight = headerRef.current?.offsetHeight ?? 64;
+    // Shrinks the observed viewport down to a 1px line just past the
+    // header's bottom edge — whichever section crosses that line is the one
+    // the header should match. Driven by layout/compositing rather than the
+    // 'scroll' event, so it keeps working through rAF throttling, tab
+    // backgrounding, and programmatic scrolling alike.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const next = (entry.target as HTMLElement).dataset.headerTheme as HeaderTheme | undefined;
+          if (next) setTheme(next);
+        }
+      },
+      { rootMargin: `-${headerHeight}px 0px -${Math.max(window.innerHeight - headerHeight - 1, 0)}px 0px` }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+    // Re-run on route change too — new page, new section stack underneath.
+  }, [pathname]);
 
   React.useEffect(() => {
     if (!productsOpen) return;
@@ -53,18 +65,21 @@ function Header({ transparent }: HeaderProps) {
     };
   }, [productsOpen]);
 
-  const isSolid = !isTransparentPage || scrolled;
+  const { bg, text, shadow } = HEADER_THEMES[theme];
+  const isLight = theme === "overlay" || theme === "navy"; // needs light nav text/icons
 
   const navLinkClass = cn(
     "text-body font-medium transition-colors duration-[var(--dur-micro)]",
-    isSolid ? "text-ink-600 hover:text-navy-900" : "text-white/90 hover:text-white"
+    isLight ? "text-white/90 hover:text-white" : "text-ink-600 hover:text-navy-900"
   );
 
   return (
     <header
+      ref={headerRef}
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-[background-color,box-shadow] duration-[var(--dur-micro)] ease-[var(--ease-out)]",
-        isSolid ? "bg-white shadow-nav" : "bg-transparent"
+        bg,
+        shadow && "shadow-nav"
       )}
     >
       <Container className="flex h-16 items-center justify-between lg:h-20">
@@ -72,7 +87,7 @@ function Header({ transparent }: HeaderProps) {
           href="/"
           className="outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
         >
-          <Logo variant={isSolid ? "navy" : "white"} />
+          <Logo variant={isLight ? "white" : "navy"} />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
@@ -132,7 +147,7 @@ function Header({ transparent }: HeaderProps) {
           <Button href="/free-trial" variant="primary" size="sm" className="hidden lg:inline-flex">
             Free trial
           </Button>
-          <MobileNav light={!isSolid} />
+          <MobileNav light={isLight} />
         </div>
       </Container>
     </header>

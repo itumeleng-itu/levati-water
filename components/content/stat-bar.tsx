@@ -9,7 +9,7 @@ const STATS = [
 
 function StatBar() {
   return (
-    <div className="border-b border-line bg-white">
+    <div data-header-theme="white" className="border-b border-line bg-white">
       <Container>
         <ul className="grid grid-cols-2 gap-y-4 py-6 text-center lg:grid-cols-4 lg:divide-x lg:divide-line">
           {STATS.map((stat) => (

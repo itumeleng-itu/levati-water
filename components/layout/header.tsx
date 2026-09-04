@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { Container } from "./container";
 import { MobileNav } from "./mobile-nav";
@@ -13,24 +14,27 @@ interface HeaderProps {
   /**
    * True for pages with a full-bleed hero the header should float over
    * (spec §7.1) — starts transparent with white text, then solid after 40px
-   * of scroll. False (default) keeps the header solid from the start, which
-   * is the safe choice until a page actually has that hero behind it.
+   * of scroll. Defaults to auto-detecting the home page ("/"), since Header
+   * is rendered once in the root layout for every route. Pass explicitly if
+   * another page later gets a full-bleed hero too.
    */
   transparent?: boolean;
 }
 
-function Header({ transparent = false }: HeaderProps) {
+function Header({ transparent }: HeaderProps) {
+  const pathname = usePathname();
+  const isTransparentPage = transparent ?? pathname === "/";
   const [scrolled, setScrolled] = React.useState(false);
   const [productsOpen, setProductsOpen] = React.useState(false);
   const productsRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    if (!transparent) return;
+    if (!isTransparentPage) return;
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [transparent]);
+  }, [isTransparentPage]);
 
   React.useEffect(() => {
     if (!productsOpen) return;
@@ -48,7 +52,7 @@ function Header({ transparent = false }: HeaderProps) {
     };
   }, [productsOpen]);
 
-  const isSolid = !transparent || scrolled;
+  const isSolid = !isTransparentPage || scrolled;
 
   const navLinkClass = cn(
     "text-body font-medium transition-colors duration-[var(--dur-micro)]",

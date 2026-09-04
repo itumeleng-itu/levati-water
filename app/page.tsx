@@ -1,77 +1,113 @@
-import { Button } from "@/components/ui/button";
+import { Droplets, Wrench, Plug, ShieldCheck } from "lucide-react";
+import { Container } from "@/components/layout/container";
+import { Section } from "@/components/layout/section";
+import { SectionHeading } from "@/components/layout/section-heading";
+import { Hero } from "@/components/content/hero";
+import { StatBar } from "@/components/content/stat-bar";
+import { SplitFeature } from "@/components/content/split-feature";
+import { ProductCard } from "@/components/content/product-card";
+import { FeatureCard } from "@/components/content/feature-card";
+import { StepList } from "@/components/content/step-list";
+import { CTABand } from "@/components/content/cta-band";
+import { PRODUCTS } from "@/lib/products";
 
-// Temporary phase-1 smoke test — checks tokens and Button render correctly.
-// Not part of the real site; delete once the real home page (spec §7.1) lands.
-export default function TokenCheckPage() {
+const WHY_LEVATI = [
+  {
+    icon: Droplets,
+    title: "Seven-stage purification",
+    body: "Minerals are added back after filtering, so the water is clean without tasting flat.",
+  },
+  {
+    icon: Wrench,
+    title: "Free maintenance",
+    body: "Scheduled delivery and free maintenance are included on every rental.",
+  },
+  {
+    icon: Plug,
+    title: "Plugs in anywhere",
+    body: "No plumbing needed — freestanding coolers set up in minutes, anywhere there's a plug.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Keeps running through water cuts",
+    body: "Coolers keep water available on-site even when municipal supply doesn't.",
+  },
+] as const;
+
+const HOW_IT_WORKS = [
+  "Call or book online",
+  "Seven-day free trial",
+  "Install and set a delivery schedule",
+] as const;
+
+export default function Home() {
   return (
-    <main className="mx-auto max-w-[1200px] px-5 py-14 md:px-8">
-      <h1 className="text-display font-heading font-bold text-ink-900">Levati Water</h1>
-      <p className="mt-2 text-h3 font-heading font-semibold text-blue-700">
-        Phase 1 token &amp; Button check
-      </p>
+    <>
+      <Hero />
+      <StatBar />
 
-      <section className="mt-10">
-        <h2 className="text-h2 font-heading font-bold text-ink-900">Type scale</h2>
-        <div className="mt-4 space-y-3">
-          <p className="text-display">Display — Pure water. Delivered.</p>
-          <p className="text-h1">H1 — Pure water. Delivered.</p>
-          <p className="text-h2">H2 — Pure water. Delivered.</p>
-          <p className="text-h3">H3 — Pure water. Delivered.</p>
-          <p className="text-lead text-ink-600">Lead — Home and office water solutions.</p>
-          <p className="text-body text-ink-600">Body — Home and office water solutions.</p>
-          <p className="text-small text-ink-400">Small — captions and placeholders.</p>
-        </div>
-      </section>
+      <Section>
+        <Container>
+          <SplitFeature
+            imageSlot="about-pouring"
+            heading="Water solutions built for Johannesburg and Pretoria"
+            linkHref="/about"
+            linkLabel="More about Levati"
+          >
+            <p>
+              Levati Water has been supplying homes and offices with bottled coolers, mains-fed
+              systems and reverse osmosis for over 30 years. Every rental includes free
+              maintenance and scheduled delivery, so your water just keeps arriving.
+            </p>
+          </SplitFeature>
+        </Container>
+      </Section>
 
-      <section className="mt-12">
-        <h2 className="text-h2 font-heading font-bold text-ink-900">Colours</h2>
-        <div className="mt-4 grid grid-cols-4 gap-3 sm:grid-cols-8">
-          {[
-            ["navy-900", "bg-navy-900"],
-            ["navy-800", "bg-navy-800"],
-            ["blue-700", "bg-blue-700"],
-            ["blue-500", "bg-blue-500"],
-            ["blue-300", "bg-blue-300"],
-            ["blue-100", "bg-blue-100"],
-            ["aqua-500", "bg-aqua-500"],
-            ["surface", "bg-surface"],
-          ].map(([label, cls]) => (
-            <div key={label}>
-              <div className={`h-16 rounded-lg border border-line ${cls}`} />
-              <p className="mt-1 text-small text-ink-400">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Section tone="surface">
+        <Container>
+          <SectionHeading heading="Our products" lead="Rent, buy or install — whatever suits the space." />
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {PRODUCTS.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </Container>
+      </Section>
 
-      <section className="mt-12">
-        <h2 className="text-h2 font-heading font-bold text-ink-900">Button — variants</h2>
-        <div className="mt-4 flex flex-wrap items-center gap-4 rounded-lg bg-surface p-6">
-          <Button variant="primary">Book a free trial</Button>
-          <Button variant="secondary">See our products</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button variant="link">Privacy</Button>
-          <Button variant="primary" disabled>
-            Disabled
-          </Button>
-        </div>
-      </section>
+      <Section id="why-levati">
+        <Container>
+          <SectionHeading heading="Why Levati" />
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {WHY_LEVATI.map((item) => (
+              <FeatureCard key={item.title} icon={item.icon} title={item.title}>
+                {item.body}
+              </FeatureCard>
+            ))}
+          </div>
+        </Container>
+      </Section>
 
-      <section className="mt-12">
-        <h2 className="text-h2 font-heading font-bold text-ink-900">Button — sizes</h2>
-        <div className="mt-4 flex flex-wrap items-center gap-4 rounded-lg bg-surface p-6">
-          <Button size="sm">Small</Button>
-          <Button size="md">Medium</Button>
-          <Button size="lg">Large</Button>
-        </div>
-      </section>
+      <Section tone="surface">
+        <Container>
+          <SectionHeading heading="How it works" />
+          <div className="mt-12">
+            <StepList steps={HOW_IT_WORKS} />
+          </div>
+        </Container>
+      </Section>
 
-      <section className="mt-12">
-        <h2 className="text-h2 font-heading font-bold text-ink-900">Button — as link</h2>
-        <div className="mt-4 flex flex-wrap items-center gap-4 rounded-lg bg-surface p-6">
-          <Button href="/free-trial">Book a free trial (Link)</Button>
-        </div>
-      </section>
-    </main>
+      <CTABand
+        heading="Try Levati water free for 7 days"
+        primaryCta={{ label: "Book a free trial", href: "/free-trial" }}
+        phone={{ display: "0861 111 853", href: "tel:+27861111853" }}
+      >
+        Includes a complimentary 18.9 litre bottle and a 500ml retail bottle to try — no
+        obligation, Johannesburg and Pretoria only.
+      </CTABand>
+
+      {/* TODO(client): testimonials + logo strip. Omitted per spec §7.1 item 9
+          until real quotes and client logos are supplied — do not write
+          placeholder quotes. */}
+    </>
   );
 }

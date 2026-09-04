@@ -52,11 +52,15 @@ export default function ContactPage() {
                 </li>
               </ul>
 
+              {/* WhatsApp's own brand green (#25D366) only reaches 1.98:1
+                  contrast with white text — nowhere near WCAG AA's 4.5:1.
+                  This darker shade stays clearly WhatsApp-associated while
+                  actually passing (~5.4:1). */}
               <a
                 href="https://wa.me/27861111853?text=Hi%2C%20I%27d%20like%20to%20find%20out%20more%20about%20Levati%20Water"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-button font-semibold text-white transition-colors duration-[var(--dur-micro)] hover:bg-[#1ebd5a]"
+                className="mt-6 flex items-center justify-center gap-2 rounded-full bg-[#0B7A3D] px-6 py-3 text-button font-semibold text-white transition-colors duration-[var(--dur-micro)] hover:bg-[#095E30]"
               >
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
                 Chat on WhatsApp

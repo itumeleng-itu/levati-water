@@ -151,7 +151,7 @@ function ContactForm() {
       {siteKey ? (
         <Turnstile siteKey={siteKey} onVerify={onVerify} onExpire={() => setValue("turnstileToken", "")} />
       ) : (
-        <p className="text-small text-ink-400">
+        <p className="text-small text-ink-600">
           Turnstile is not configured — set NEXT_PUBLIC_TURNSTILE_SITE_KEY in .env.local.
         </p>
       )}

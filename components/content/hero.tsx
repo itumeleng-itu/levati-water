@@ -18,10 +18,13 @@ function Hero() {
     >
       <Container className="flex flex-col items-center gap-10 pb-14 pt-28 md:flex-row md:pb-16 md:pt-24 lg:pb-20 lg:pt-28">
         <div className="flex flex-col items-start text-left md:basis-3/5 lg:basis-[55%]">
-          <h1 className={`max-w-[20ch] text-display font-heading font-bold text-white ${reveal(0)}`}>
+          {/* Navy, not white — see components/content/cta-band.tsx for why:
+              this gradient is light-to-medium blue throughout, and white
+              text fails contrast (as low as 1.17:1) everywhere on it. */}
+          <h1 className={`max-w-[20ch] text-display font-heading font-bold text-navy-900 ${reveal(0)}`}>
             Pure water. Delivered.
           </h1>
-          <p className={`mt-4 max-w-[42ch] text-lead text-white/90 ${reveal(80)}`}>
+          <p className={`mt-4 max-w-[42ch] text-lead text-navy-900 ${reveal(80)}`}>
             Home and office water solutions across Johannesburg and Pretoria.
           </p>
           <div className={`mt-8 flex w-full flex-col gap-4 sm:w-auto sm:flex-row ${reveal(160)}`}>
@@ -32,7 +35,7 @@ function Hero() {
               href="/products"
               variant="secondary"
               size="lg"
-              className="text-white hover:bg-white/10"
+              className="text-navy-900 hover:bg-navy-900/10"
             >
               See our products
             </Button>

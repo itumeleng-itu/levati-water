@@ -65,12 +65,23 @@ function Header() {
     };
   }, [productsOpen]);
 
-  const { bg, text, shadow } = HEADER_THEMES[theme];
-  const isLight = theme === "overlay" || theme === "navy"; // needs light nav text/icons
+  const { bg, shadow } = HEADER_THEMES[theme];
+  const isLight = theme === "navy"; // only the footer's dark bg needs light nav text/icons
+  const isOnGradient = theme === "overlay";
 
+  // ink-600 (used on the solid white/surface themes, confirmed safe at
+  // 5.9:1 there) drops to 2.85:1 against the gradient's darker stops, which
+  // sit under the right-hand nav items — not just a worst-case corner.
+  // navy-900 holds 8–14:1 across the whole gradient, so the overlay theme
+  // gets that instead, with underline standing in for the hover colour
+  // change (color-only hover shift isn't guaranteed safe at every opacity).
   const navLinkClass = cn(
     "text-body font-medium transition-colors duration-[var(--dur-micro)]",
-    isLight ? "text-white/90 hover:text-white" : "text-ink-600 hover:text-navy-900"
+    isLight
+      ? "text-white/90 hover:text-white"
+      : isOnGradient
+        ? "text-navy-900 hover:underline"
+        : "text-ink-600 hover:text-navy-900"
   );
 
   return (

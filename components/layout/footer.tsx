@@ -18,6 +18,9 @@ function Footer() {
         <div className="flex flex-col items-center gap-4 border-t border-white/10 pt-6 text-small text-blue-300 sm:flex-row sm:justify-between sm:pt-8">
           <p>&copy; {year} Levati Water. All rights reserved.</p>
           <div className="flex gap-6">
+            <Link href="/faq" className="hover:text-white">
+              FAQ
+            </Link>
             <Link href="/privacy" className="hover:text-white">
               Privacy
             </Link>

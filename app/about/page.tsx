@@ -16,9 +16,10 @@ export const metadata: Metadata = {
     "Levati Water is a South African drinking-water company founded by Trevor Currie, who has over 30 years in the water industry, and Happiness Mphake.",
 };
 
-// Mphake was a founding Alpen Spa employee and stayed on through the Nestlé
-// Waters years — not someone Currie met only when Levati started. Source
-// doc: "Do not reduce him to a name."
+// Currie and Mphake had parallel careers at the same two companies before
+// teaming up — the original About Us copy is explicit that Currie "more
+// recently teamed up with" Mphake, not that they were partners from 1996.
+// Mphake gets his own credentials here rather than a name-check at the end.
 const TIMELINE = [
   {
     year: "Early 1990s",
@@ -26,15 +27,15 @@ const TIMELINE = [
   },
   {
     year: "1996",
-    text: "Currie returns to South Africa and founds Oaysis Water — later Alpen Spa — with Happiness Mphake among its founding team.",
+    text: "Currie returns to South Africa and founds Oaysis Water — later Alpen Spa — at a time when water coolers existed but still had to be filled by hand from the tap.",
   },
   {
     year: "2001",
-    text: "Alpen Spa is absorbed into Nestlé Waters. Currie heads the Home & Office division, with Mphake continuing alongside him.",
+    text: "Alpen Spa is absorbed into Nestlé Waters. Currie heads the Home & Office division for a number of years; Happiness Mphake, a founding Alpen Spa employee, also goes on to work at Nestlé Waters.",
   },
   {
     year: "Levati Water",
-    text: "Currie and Mphake bring that shared experience into their own venture, Levati Water.",
+    text: "Currie and Mphake more recently team up to found Levati Water together.",
   },
 ] as const;
 
@@ -79,11 +80,13 @@ export default function AboutPage() {
           <SplitFeature imageSlot="about-office" heading="How we got here">
             <p>
               Trevor Currie&apos;s water career started in the UK water market in the early 1990s.
-              He returned to South Africa in 1996 and founded Oaysis Water, with Happiness Mphake
-              among its founding employees. Oaysis became Alpen Spa and was later absorbed into
-              Nestlé Waters, where Currie headed the Home &amp; Office division and Mphake
-              continued to build his own wealth of experience in that industry. Levati Water is
-              the result of that shared history, run by the two of them together.
+              He returned to South Africa in 1996 and founded Oaysis Water — at a time when water
+              coolers existed, but companies and homes still had to fill their own bottles from
+              the tap. Oaysis became Alpen Spa and was later absorbed into Nestlé Waters, where
+              Currie headed the Home &amp; Office division for a number of years. Happiness
+              Mphake, a founding Alpen Spa employee who also went on to work at Nestlé Waters,
+              built his own wealth of experience in that same industry. More recently, the two of
+              them teamed up to found Levati Water together.
             </p>
           </SplitFeature>
         </Container>
@@ -118,8 +121,12 @@ export default function AboutPage() {
               Interested in the water industry?
             </h2>
             <p className="max-w-[var(--measure)] text-body text-ink-600">
-              This isn&apos;t only for companies — if you&apos;ve got drive and enthusiasm and want
-              to find out more about the water industry, get in touch with Trevor or Happy.
+              This isn&apos;t only for companies — if you&apos;ve got the drive and enthusiasm of a
+              self-starter and want to find out more about the water industry, give Trevor or
+              Happy a call and see whether you&apos;ve got what it takes to get involved.
+            </p>
+            <p className="text-lead font-heading font-semibold italic text-navy-900">
+              &ldquo;Water is the new oil.&rdquo;
             </p>
             <Button href="/contact" variant="primary" size="lg" className="mt-2">
               Get in touch

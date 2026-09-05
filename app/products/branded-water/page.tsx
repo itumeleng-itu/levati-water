@@ -39,13 +39,10 @@ export default function BrandedWaterPage() {
       <Section>
         <Container>
           <SectionHeading heading="Mockup gallery" align="left" />
-          {/* TODO(client): real branded bottle mockups — these three repeat the
-              one placeholder slot IMAGES.md defines for this product until
-              actual artwork/label mockups are supplied. */}
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
             <ImagePlaceholder slot="product-branded" className="aspect-square w-full rounded-xl" />
-            <ImagePlaceholder slot="product-branded" className="aspect-square w-full rounded-xl" />
-            <ImagePlaceholder slot="product-branded" className="aspect-square w-full rounded-xl" />
+            <ImagePlaceholder slot="product-branded-2" className="aspect-square w-full rounded-xl" />
+            <ImagePlaceholder slot="product-branded-3" className="aspect-square w-full rounded-xl" />
           </div>
         </Container>
       </Section>

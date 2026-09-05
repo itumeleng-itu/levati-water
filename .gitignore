@@ -7,5 +7,18 @@ out/
 next-env.d.ts
 public/images/*.jpg
 !public/images/credits.json
+
+# Real photography the client has approved and that's actually wired into a
+# component (see READY_SLOTS in components/ui/image-placeholder.tsx) — every
+# other file in public/images/ is a leftover stock-sourcing candidate and
+# stays ignored until it's the same kind of deliberate, reviewed choice.
+!public/images/hero-main.jpg
+!public/images/about-pouring.jpg
+!public/images/product-cooler.jpg
+!public/images/product-tap.jpg
+!public/images/product-filter.jpg
+!public/images/product-branded.jpg
+!public/images/product-branded-2.jpg
+!public/images/product-branded-3.jpg
 *.tsbuildinfo
 .DS_Store

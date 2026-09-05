@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Ripple } from "@/components/ui/ripple";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 // Staggered 80ms apart, per spec §3 — the one permitted scroll-independent
 // animation on the page. `backwards` fill-mode holds each element at its
@@ -51,10 +51,21 @@ function Hero() {
               height comes from its content (the photo), so a percentage
               height here wouldn't resolve against a definite value. */}
           <Ripple className="pointer-events-none absolute -inset-12 hidden lg:block" />
-          <ImagePlaceholder
-            slot="hero-main"
-            className="relative aspect-[4/3] w-full rounded-xl shadow-hover"
-          />
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-hover">
+            <Image
+              src="/images/hero-main.jpg"
+              alt="Rows of large water cooler bottles ready for delivery"
+              fill
+              priority
+              sizes="(min-width: 1024px) 45vw, (min-width: 768px) 40vw, 70vw"
+              className="object-cover"
+            />
+            {/* The source photo's cyan cast runs colder/more saturated than
+                the site's blue-700/navy-900 palette. A flat brand-blue wash
+                at low opacity pulls it toward that palette without needing
+                mix-blend-mode, which renders unreliably across engines. */}
+            <div className="absolute inset-0 bg-blue-700/25" aria-hidden="true" />
+          </div>
         </div>
       </Container>
     </section>

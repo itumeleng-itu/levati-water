@@ -71,7 +71,7 @@ export default function AboutPage() {
       <CompactHero
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
         heading="Two directors. Decades of water experience."
-        lead="Levati Water is run by Trevor Currie and Happiness Mphake, serving homes and offices across Johannesburg and Pretoria."
+        lead="Levati Water is run by Trevor Currie and Happiness Mphake, serving homes and offices across Gauteng."
       />
 
       <Section>

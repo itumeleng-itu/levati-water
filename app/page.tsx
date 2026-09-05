@@ -50,7 +50,7 @@ export default function Home() {
         <Container>
           <SplitFeature
             imageSlot="about-pouring"
-            heading="Water solutions built for Johannesburg and Pretoria"
+            heading="Water solutions built for Gauteng"
             linkHref="/about"
             linkLabel="More about Levati"
           >

@@ -7,7 +7,7 @@ const STATS = [
   "30+ years of founder experience",
   "7-stage reverse osmosis",
   "Free maintenance on rentals",
-  "Jhb & Pretoria delivery",
+  "Gauteng delivery",
 ] as const;
 
 function StatBar() {

@@ -70,11 +70,9 @@ export default function ContactPage() {
             {/* No physical address supplied yet — a service-area graphic
                 stands in for a map (spec §7.6: "Map only if the client
                 supplies a physical address — otherwise a service-area
-                graphic"). TODO(client): the original site's contact page
-                heading was "Gauteng:" — broader than Johannesburg/Pretoria.
-                Only the free trial was explicitly restricted to those two
-                cities. Confirm the real general service area before
-                treating this box as settled. */}
+                graphic"). Confirmed against the live site (its contact page
+                region heading is "Gauteng", not Johannesburg/Pretoria) —
+                the free trial itself stays scoped to those two cities. */}
             <div className="rounded-lg bg-[image:var(--grad-card)] p-6">
               <p className="text-small font-semibold uppercase tracking-wide text-blue-700">
                 Service areas
@@ -82,13 +80,12 @@ export default function ContactPage() {
               <ul className="mt-4 flex flex-col gap-3">
                 <li className="flex items-center gap-2.5 text-body font-semibold text-navy-900">
                   <MapPin className="h-5 w-5 shrink-0" aria-hidden="true" />
-                  Johannesburg
-                </li>
-                <li className="flex items-center gap-2.5 text-body font-semibold text-navy-900">
-                  <MapPin className="h-5 w-5 shrink-0" aria-hidden="true" />
-                  Pretoria
+                  Gauteng
                 </li>
               </ul>
+              <p className="mt-3 text-small text-ink-600">
+                The 7-day free trial covers Johannesburg and Pretoria only.
+              </p>
             </div>
           </div>
         </div>

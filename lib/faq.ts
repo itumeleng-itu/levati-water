@@ -66,13 +66,9 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
   {
     name: "General",
     items: [
-      // Confirmed against the live site's own contact page ("Region:
-      // Gauteng") — broader than the free trial's Johannesburg/Pretoria
-      // scope, which stays separately called out below.
-      {
-        question: "Which areas do you serve?",
-        answer: "Gauteng. The 7-day free trial is available in Johannesburg and Pretoria only.",
-      },
+      // No "which areas do you serve" item here — the original site names a
+      // location nowhere except the free-trial offer (see the Free trial
+      // category above), so a general service-area claim doesn't belong.
       {
         question: "How do I get in touch?",
         answer: "Call 0861 111 853, message us on WhatsApp, or use the contact form.",

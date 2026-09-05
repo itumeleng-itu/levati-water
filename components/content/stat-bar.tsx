@@ -3,11 +3,13 @@ import { Container } from "@/components/layout/container";
 // "30+ years" belongs to Trevor Currie's own career (water industry since
 // the early 1990s), not Levati as a trading entity — see the content
 // source-of-truth doc. Scoped to "founder experience" so it stays accurate.
+// No location stat here: the original site only ever names a service area
+// in the free-trial context, never as general homepage marketing copy.
 const STATS = [
   "30+ years of founder experience",
   "7-stage reverse osmosis",
   "Free maintenance on rentals",
-  "Gauteng delivery",
+  "Ready in 5-10 minutes",
 ] as const;
 
 function StatBar() {

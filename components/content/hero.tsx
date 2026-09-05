@@ -25,7 +25,7 @@ function Hero() {
             Pure water. Delivered.
           </h1>
           <p className={`mt-4 max-w-[42ch] text-lead text-navy-900 ${reveal(80)}`}>
-            Home and office water solutions across Gauteng.
+            Bottled water coolers, mains-fed systems and reverse osmosis — for home and office.
           </p>
           <div className={`mt-8 flex w-full flex-col gap-4 sm:w-auto sm:flex-row ${reveal(160)}`}>
             <Button href="/free-trial" variant="primary" size="lg">

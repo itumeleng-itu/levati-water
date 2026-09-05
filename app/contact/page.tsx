@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, Printer, Mail, MessageCircle, MapPin } from "lucide-react";
+import { Phone, Printer, Mail, MessageCircle, Gift } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { ContactForm } from "@/components/forms/contact-form";
@@ -68,23 +68,17 @@ export default function ContactPage() {
             </div>
 
             {/* No physical address supplied yet — a service-area graphic
-                stands in for a map (spec §7.6: "Map only if the client
-                supplies a physical address — otherwise a service-area
-                graphic"). Confirmed against the live site (its contact page
-                region heading is "Gauteng", not Johannesburg/Pretoria) —
-                the free trial itself stays scoped to those two cities. */}
+                stands in for a map (spec §7.6). The original site names a
+                location nowhere except the free-trial offer, so that's the
+                only location claim reproduced here — no general "we serve
+                X" box invented on top of it. */}
             <div className="rounded-lg bg-[image:var(--grad-card)] p-6">
-              <p className="text-small font-semibold uppercase tracking-wide text-blue-700">
-                Service areas
+              <p className="flex items-center gap-2.5 text-small font-semibold uppercase tracking-wide text-blue-700">
+                <Gift className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Free trial
               </p>
-              <ul className="mt-4 flex flex-col gap-3">
-                <li className="flex items-center gap-2.5 text-body font-semibold text-navy-900">
-                  <MapPin className="h-5 w-5 shrink-0" aria-hidden="true" />
-                  Gauteng
-                </li>
-              </ul>
-              <p className="mt-3 text-small text-ink-600">
-                The 7-day free trial covers Johannesburg and Pretoria only.
+              <p className="mt-3 text-body text-navy-900">
+                The 7-day free trial is available in Johannesburg and Pretoria only.
               </p>
             </div>
           </div>

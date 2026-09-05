@@ -66,14 +66,18 @@ export const FAQ_CATEGORIES: FAQCategory[] = [
   {
     name: "General",
     items: [
+      // TODO(client): the original site's contact page heading was "Gauteng:"
+      // — broader than Johannesburg/Pretoria. Only the free trial was
+      // explicitly restricted to those two cities. Confirm the real general
+      // service area before this answer is treated as settled.
       { question: "Which areas do you serve?", answer: "Johannesburg and Pretoria." },
       {
         question: "How do I get in touch?",
         answer: "Call 0861 111 853, message us on WhatsApp, or use the contact form.",
       },
       {
-        question: "Do coolers keep working during load shedding or water cuts?",
-        answer: "Yes — coolers keep water available on-site even when municipal supply doesn't.",
+        question: "Do coolers keep working during water cuts?",
+        answer: "Yes — bottled and mains-fed coolers keep water available on-site even when municipal supply doesn't.",
       },
     ],
   },

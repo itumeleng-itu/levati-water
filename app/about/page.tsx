@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ShieldCheck, Droplets, Wrench, MapPin } from "lucide-react";
+import { ShieldCheck, Droplets, Wrench, Clock } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { SectionHeading } from "@/components/layout/section-heading";
@@ -13,42 +13,51 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "About — Levati Water",
   description:
-    "Levati Water is a South African drinking-water company founded by Trevor Currie and Happiness Mphake, with over 30 years in the industry.",
+    "Levati Water is a South African drinking-water company founded by Trevor Currie, who has over 30 years in the water industry, and Happiness Mphake.",
 };
 
+// Mphake was a founding Alpen Spa employee and stayed on through the Nestlé
+// Waters years — not someone Currie met only when Levati started. Source
+// doc: "Do not reduce him to a name."
 const TIMELINE = [
-  { year: "Early 1990s", text: "Trevor Currie enters the water market in the UK." },
+  {
+    year: "Early 1990s",
+    text: "Trevor Currie enters the water industry, honing his skills in the competitive UK market.",
+  },
   {
     year: "1996",
-    text: "Returns to South Africa and founds Oaysis Water, which later becomes Alpen Spa.",
+    text: "Currie returns to South Africa and founds Oaysis Water — later Alpen Spa — with Happiness Mphake among its founding team.",
   },
   {
     year: "2001",
-    text: "Alpen Spa is absorbed into Nestlé Waters. Currie goes on to head the Home & Office division.",
+    text: "Alpen Spa is absorbed into Nestlé Waters. Currie heads the Home & Office division, with Mphake continuing alongside him.",
   },
-  { year: "Levati Water", text: "Currie partners with Happiness Mphake to found Levati Water." },
+  {
+    year: "Levati Water",
+    text: "Currie and Mphake bring that shared experience into their own venture, Levati Water.",
+  },
 ] as const;
 
 const VALUES = [
   {
     icon: ShieldCheck,
     title: "Reliability",
-    body: "Three decades in the water industry, serving Johannesburg and Pretoria without interruption — including through load shedding and water cuts.",
+    body: "Bottled and mains-fed coolers keep water available on-site even during the water cuts that have become a way of life in South Africa.",
   },
   {
     icon: Droplets,
     title: "Water quality",
-    body: "Seven-stage reverse osmosis purification on every system, with minerals added back for taste.",
+    body: "Levati's bottled water goes through seven-stage reverse osmosis, with minerals added back for taste. RO systems for the home or office come in 5- or 7-stage options.",
   },
   {
     icon: Wrench,
     title: "Straightforward service",
-    body: "Free maintenance and scheduled delivery on every rental — no hidden call-out fees.",
+    body: "Free maintenance and scheduled delivery on every rental, from installation to filter and bottle replacements.",
   },
   {
-    icon: MapPin,
-    title: "Local & responsive",
-    body: "A Johannesburg and Pretoria-based team, not a call centre.",
+    icon: Clock,
+    title: "Ready in minutes",
+    body: "Freestanding coolers plug into any standard socket and dispense drinkable water within 5–10 minutes of installation.",
   },
 ] as const;
 
@@ -61,7 +70,7 @@ export default function AboutPage() {
     <>
       <CompactHero
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
-        heading="30+ years of getting water right"
+        heading="Two directors. Decades of water experience."
         lead="Levati Water is run by Trevor Currie and Happiness Mphake, serving homes and offices across Johannesburg and Pretoria."
       />
 
@@ -70,10 +79,11 @@ export default function AboutPage() {
           <SplitFeature imageSlot="about-office" heading="How we got here">
             <p>
               Trevor Currie&apos;s water career started in the UK water market in the early 1990s.
-              He returned to South Africa in 1996 and founded Oaysis Water, which became Alpen Spa
-              and was later absorbed into Nestlé Waters, where he headed the Home &amp; Office
-              division. Levati Water is the result of that experience, built in partnership with
-              Happiness Mphake.
+              He returned to South Africa in 1996 and founded Oaysis Water, with Happiness Mphake
+              among its founding employees. Oaysis became Alpen Spa and was later absorbed into
+              Nestlé Waters, where Currie headed the Home &amp; Office division and Mphake
+              continued to build his own wealth of experience in that industry. Levati Water is
+              the result of that shared history, run by the two of them together.
             </p>
           </SplitFeature>
         </Container>
@@ -105,11 +115,11 @@ export default function AboutPage() {
         <Container>
           <div className="flex flex-col items-center gap-4 rounded-lg border border-line bg-white p-8 text-center shadow-card sm:p-10">
             <h2 className="text-h2 font-heading font-bold text-ink-900">
-              Become a Levati partner
+              Interested in the water industry?
             </h2>
             <p className="max-w-[var(--measure)] text-body text-ink-600">
-              We&apos;re looking for distributors and partners to help bring Levati water to more
-              homes and offices across South Africa. Get in touch to find out more.
+              This isn&apos;t only for companies — if you&apos;ve got drive and enthusiasm and want
+              to find out more about the water industry, get in touch with Trevor or Happy.
             </p>
             <Button href="/contact" variant="primary" size="lg" className="mt-2">
               Get in touch

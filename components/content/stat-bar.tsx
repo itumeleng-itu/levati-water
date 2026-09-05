@@ -1,7 +1,10 @@
 import { Container } from "@/components/layout/container";
 
+// "30+ years" belongs to Trevor Currie's own career (water industry since
+// the early 1990s), not Levati as a trading entity — see the content
+// source-of-truth doc. Scoped to "founder experience" so it stays accurate.
 const STATS = [
-  "30+ years in the industry",
+  "30+ years of founder experience",
   "7-stage reverse osmosis",
   "Free maintenance on rentals",
   "Jhb & Pretoria delivery",

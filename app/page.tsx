@@ -55,9 +55,10 @@ export default function Home() {
             linkLabel="More about Levati"
           >
             <p>
-              Levati Water has been supplying homes and offices with bottled coolers, mains-fed
-              systems and reverse osmosis for over 30 years. Every rental includes free
-              maintenance and scheduled delivery, so your water just keeps arriving.
+              Levati Water is run by directors with over 30 years of combined water-industry
+              experience, supplying homes and offices with bottled coolers, mains-fed systems and
+              reverse osmosis. Every rental includes free maintenance and scheduled delivery, so
+              your water just keeps arriving.
             </p>
           </SplitFeature>
         </Container>

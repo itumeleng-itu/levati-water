@@ -70,7 +70,11 @@ export default function ContactPage() {
             {/* No physical address supplied yet — a service-area graphic
                 stands in for a map (spec §7.6: "Map only if the client
                 supplies a physical address — otherwise a service-area
-                graphic"). */}
+                graphic"). TODO(client): the original site's contact page
+                heading was "Gauteng:" — broader than Johannesburg/Pretoria.
+                Only the free trial was explicitly restricted to those two
+                cities. Confirm the real general service area before
+                treating this box as settled. */}
             <div className="rounded-lg bg-[image:var(--grad-card)] p-6">
               <p className="text-small font-semibold uppercase tracking-wide text-blue-700">
                 Service areas

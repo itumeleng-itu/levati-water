@@ -38,7 +38,7 @@ export default function ProductsPage() {
       <CompactHero
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
         heading="Water solutions for every space"
-        lead="Every system runs through seven-stage reverse osmosis purification, with minerals added back for taste — rent, buy, or have it installed."
+        lead="Levati's bottled water goes through seven-stage reverse osmosis, with minerals added back for taste — rent, buy, or have a system installed."
       />
 
       <Section>

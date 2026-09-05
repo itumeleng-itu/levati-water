@@ -50,7 +50,7 @@ export const PRODUCTS: Product[] = [
       { name: "B10A", description: "Hot and cold dispensing." },
       { name: "B10B", description: "Cold and ambient dispensing." },
     ],
-    idealFor: ["Homes", "Small offices", "Reception areas", "Waiting rooms"],
+    idealFor: ["Homes", "Small offices"],
     faqs: [
       {
         question: "Do I need a plumber to install it?",
@@ -121,11 +121,11 @@ export const PRODUCTS: Product[] = [
   {
     slug: "reverse-osmosis",
     title: "Reverse osmosis",
-    descriptor: "Seven-stage filtration for the cleanest water straight from your tap.",
+    descriptor: "5- and 7-stage filtration for the cleanest water straight from your tap.",
     tag: "Installed",
     imageSlot: "product-filter",
     heroDescription:
-      "Seven-stage filtration installed under the counter with a dedicated tap above, or as an above-counter unit with its own tap — for the cleanest water straight from your kitchen.",
+      "5- and 7-stage filtration installed under the counter with a dedicated tap above, or as an above-counter unit with its own tap — for the cleanest water straight from your kitchen.",
     features: [
       "5 and 7 stage reverse osmosis systems",
       "Single, dual and triple stage filter units, taps included",

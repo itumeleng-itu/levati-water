@@ -6,6 +6,10 @@ import { cn } from "@/lib/utils";
 // then recolored to solid navy-900 / white (alpha-preserving) so it matches
 // the site's token palette rather than the source file's own blue-to-lavender
 // gradient. Includes the "taste the difference." tagline.
+//
+// TODO(client): the original site's tagline was "Feel the Difference." —
+// this logo (as supplied) reads "taste the difference." instead. Confirm
+// which is correct before treating the new wording as final.
 const WIDTH = 311;
 const HEIGHT = 116;
 

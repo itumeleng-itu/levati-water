@@ -15,9 +15,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.41.0",
-    "next": "15.5.4",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "15.5.25",
+    "react": "19.1.9",
+    "react-dom": "19.1.9",
     "react-hook-form": "^7.87.0",
     "resend": "^6.26.0",
     "tailwind-merge": "^3.6.0",
@@ -26,8 +26,8 @@
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.14",
     "@types/node": "22.14.0",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.0",
+    "@types/react": "19.1.17",
+    "@types/react-dom": "19.1.11",
     "tailwindcss": "4.1.14",
     "typescript": "5.7.3"
   }

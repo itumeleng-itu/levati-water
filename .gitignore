@@ -6,7 +6,6 @@ out/
 .env*.local
 next-env.d.ts
 public/images/*.jpg
-!public/images/credits.json
 
 # Real photography the client has approved and that's actually wired into a
 # component (see READY_SLOTS in components/ui/image-placeholder.tsx) — every

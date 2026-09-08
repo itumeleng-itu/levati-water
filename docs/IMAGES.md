@@ -1,105 +1,64 @@
 # Imagery
 
-## Licensing
+Photography is supplied directly by the client and dropped into `public/images/`
+as `<slot>.jpg` — there's no stock-photo fetch step or API key involved.
 
-Two sources, both free for commercial use with no attribution required and both
-permitting modification:
+## How a slot goes live
 
-| Source | Licence | Notes |
+1. Save the photo as `public/images/<slot>.jpg`.
+2. Add it to `READY_SLOTS` in `components/ui/image-placeholder.tsx` (an alt
+   text, and an optional `position` for portrait sources cropped into a wider
+   box — see that file's comments).
+3. Every usage of that slot (product card, product detail hero, split
+   feature, the branded-water mockup gallery) switches from the labelled
+   placeholder to the real photo automatically.
+
+The hero image (`hero-main.jpg`) is the one exception — it's wired directly
+in `components/content/hero.tsx` rather than through `ImagePlaceholder`,
+since it also needs `priority` and a brand-blue colour wash (see that file's
+comments for why).
+
+## Current slots
+
+| Slot | Used on | Status |
 |---|---|---|
-| **Pexels** | https://www.pexels.com/license/ | Primary. Has an open API, which is why the fetch script uses it. |
-| **Unsplash** | https://unsplash.com/license | Fallback for manual picks. Its API needs an app registration; the download-page route is fine for one-offs. |
+| `hero-main` | Home hero | Live |
+| `about-pouring` | Home page split feature | Live |
+| `about-office` | `/about` split feature | Pending — shows a labelled placeholder |
+| `product-cooler` | Bottled water coolers card + detail hero | Live |
+| `product-tap` | Mains-fed coolers card + detail hero | Live |
+| `product-filter` | Reverse osmosis card + detail hero | Live |
+| `product-branded` | Branded water card + mockup gallery tile 1 | Live |
+| `product-branded-2` | Branded water mockup gallery tile 2 | Live |
+| `product-branded-3` | Branded water mockup gallery tile 3 | Live |
 
-Both licences forbid: reselling the photo as-is, and using identifiable people to
-imply endorsement. Neither is an issue for this site.
-
-**Not permitted here:** iStock, Getty, Shutterstock, Vecteezy, Adobe Stock,
-Freepik. Several rank highly for these searches and some show "free" badges that
-mean *free trial* or *free with attribution and a subscription*. Do not pull from
-them.
-
-## How to get the images
-
-```bash
-# 1. Free key, instant, no card required
-open https://www.pexels.com/api/
-
-# 2. Add it
-echo 'PEXELS_API_KEY=xxxxxxxxxxxx' >> .env.local
-
-# 3. Fetch everything
-node scripts/fetch-images.mjs
-
-# 4. Don't like one? Bump its `pick` index in the manifest, then:
-node scripts/fetch-images.mjs --slot=hero-main
-```
-
-Output lands in `public/images/` with a `credits.json` recording photographer,
-source URL and dimensions for every file.
-
-## Slot map
-
-| File | Used on | Ratio | Notes |
-|---|---|---|---|
-| `hero-main.jpg` | Home hero | 4:3 | Must read well behind the gradient overlay |
-| `hero-ripple.jpg` | Home hero backdrop | 16:9 | Decorative, `lg`+ only |
-| `about-pouring.jpg` | Home about split, `/about` | 4:5 | Portrait, matches the reference's About block |
-| `about-office.jpg` | `/about` | 16:9 | |
-| `product-cooler.jpg` | Bottled water coolers card + detail hero | 1:1 card, 4:3 hero | |
-| `product-bottle.jpg` | Branded water, retail range | 1:1 | |
-| `product-tap.jpg` | Mains-fed coolers | 1:1 / 4:3 | |
-| `product-filter.jpg` | Reverse osmosis | 1:1 / 4:3 | |
-| `product-branded.jpg` | Branded water card | 1:1 | |
-| `feature-drinking.jpg` | Why Levati | 16:9 | |
-| `feature-gym.jpg` | Mains-fed "ideal for" | 16:9 | |
-| `feature-warehouse.jpg` | Mains-fed "ideal for" | 16:9 | |
-| `feature-delivery.jpg` | How it works, step 3 | 16:9 | |
-| `cta-droplet.jpg` | CTA band backdrop | 21:9 | Heavy gradient overlay, so detail matters less |
-| `texture-bubbles.jpg` | Section texture | 16:9 | Low opacity |
-
-## Rules
-
-**Stock photography is a placeholder, not a decision.** Every product image here
-is a generic dispenser or bottle — not a Clover B10A, not a Levati-branded
-bottle. Flag this to the client at handover and swap in real product shots as
-soon as they arrive. Do not let generic stock ship as if it were the real
-product; it undermines the "this is our equipment" claim on the product pages.
-
-**People in photos.** Prefer shots that read as plausibly South African or
-neutral enough not to jar. If a returned image is obviously wrong for the market,
-bump the `pick` index rather than shipping it.
-
-**Consistency.** The reference has a cool, bright, high-key look throughout. If
-a downloaded photo is warm or dark, either reshoot the query or apply a light
-CSS filter (`saturate(1.05) brightness(1.03)`) — but do that in one shared
-utility class, not per-image.
+**Stock photography is a placeholder, not a decision.** A generic dispenser
+or bottle standing in for real Levati equipment undermines the "this is our
+equipment" claim on the product pages — don't let a placeholder ship as if
+it were the real product.
 
 ## Optimisation
 
-- Serve AVIF with WebP fallback. Next handles this: set
-  `images: { formats: ['image/avif', 'image/webp'] }` in `next.config.ts`.
-- Always pass explicit `width` and `height` to reserve layout space — this is how
-  CLS stays under 0.1.
+- Serve AVIF with WebP fallback — already configured in `next.config.ts`
+  (`images.formats`).
+- `next/image`'s `fill` + explicit container aspect ratio (not manual
+  width/height) is the pattern used throughout — see `image-placeholder.tsx`.
 - Hero image only gets `priority`. Everything else stays lazy.
-- Set `sizes` on every responsive image, e.g. for the 4-up product grid:
-  `sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"`.
-- Target under 200KB per served variant at 1x.
+- Set `sizes` accurately for the layout an image actually renders at — a
+  mismatch here previously caused a bad crop by making the browser fetch a
+  too-small source (see git history on `image-placeholder.tsx`'s `sizes`).
 
 ## Icons and graphics
 
 - **Icons** — Lucide React only. No mixed icon sets.
-- **Ripple graphic** — hand-authored SVG (concentric ellipses, stroke
-  `--color-blue-300`, decreasing opacity outward). Do not use a stock photo for
-  this; a raster ripple will not scale cleanly behind the hero.
-- **Logo** — supplied by the client as PNG (`Downloads/levati-removebg-preview.png`,
-  transparent background), not the SVG this doc originally asked for. The
-  source file's own blue-to-lavender gradient didn't match the token
-  palette, so `public/brand/` holds two alpha-preserving recolors of the
-  full lockup (wordmark + "taste the difference." tagline) instead of the
-  original: `logo-navy.png` (solid `--color-navy-900`, the default) and
-  `logo-white.png` (for the header's transparent-over-hero state and the
-  navy footer, where navy-on-navy would have no contrast). `TODO(client)`:
-  ask for a real SVG when convenient — a raster crop is fine for now but
-  won't scale as cleanly as a vector at very large sizes (e.g. a print piece).
-- **OG image** — generate at build time with `next/og`, 1200×630, gradient
-  background plus logotype.
+- **Ripple graphic** — hand-authored SVG (`components/ui/ripple.tsx`,
+  concentric ellipses, stroke `--color-blue-300`, decreasing opacity
+  outward). Not a stock photo — a raster ripple wouldn't scale cleanly
+  behind the hero.
+- **Logo** — client-supplied PNG, recolored (alpha-preserving) to the token
+  palette. `public/brand/logo-navy.png` (default) and `logo-white.png` (for
+  the header's transparent-over-hero state and the navy footer). Includes
+  the "taste the difference." tagline. `TODO(client)`: a real SVG would
+  scale more cleanly at very large sizes (e.g. print) than this raster crop.
+- **Favicon** — generated as code (`app/icon.tsx`, `app/apple-icon.tsx`) via
+  `next/og`'s `ImageResponse`, not a sourced image file.

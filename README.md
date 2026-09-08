@@ -56,12 +56,13 @@ gitignored — never commit real keys.
 | `RESEND_FROM_EMAIL` | Same | Domain must be verified in the Resend dashboard before mail sends |
 | `LEADS_TO_EMAIL` | Same | Where free-trial/contact submissions land |
 | `NEXT_PUBLIC_SITE_URL` | Correct URLs in `sitemap.xml` / `robots.txt` | Defaults to `https://levatiwater.com` if unset — see `lib/site.ts` |
-| `PEXELS_API_KEY`, `LUMMI_API_KEY` | `scripts/fetch-images.mjs` only | Not used by the site itself; stock-photo sourcing scripts, largely superseded by client-supplied photography in `public/images/` |
 
-**These aren't just dev-time niceties.** If you deploy without setting the Turnstile and
-Resend variables on the hosting platform itself (its dashboard's environment variables —
-`.env.local` never leaves your machine), the free-trial and contact forms will be broken
-on the live site: visitors can fill them out, but submission fails every time.
+None of the above are required to run or demo the site — every page renders fine without
+them. They only matter once the free-trial/contact forms need to actually verify a
+real human and deliver a real email. Until then, "Turnstile is not configured" on those
+forms is expected, not a bug. When that day comes: set the Turnstile and Resend variables
+on the hosting platform itself (its dashboard's environment variables — `.env.local`
+never leaves your machine).
 
 ## Deployment
 

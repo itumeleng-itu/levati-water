@@ -68,7 +68,6 @@ pnpm dev            # local dev
 pnpm build          # production build
 pnpm lint           # eslint + prettier check
 pnpm typecheck      # tsc --noEmit
-node scripts/fetch-images.mjs   # download stock photography (needs PEXELS_API_KEY)
 ```
 
 ## Build order

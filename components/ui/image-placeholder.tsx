@@ -21,7 +21,8 @@ const READY_SLOTS: Record<string, { alt: string; position?: string }> = {
 
 interface ImagePlaceholderProps extends React.ComponentProps<"div"> {
   /** The slot name from docs/IMAGES.md, e.g. "hero-main" — shown so it's obvious
-   * in review which real photo (via scripts/fetch-images.mjs) replaces this. */
+   * in review which real photo (dropped into public/images/, then added to
+   * READY_SLOTS below) replaces this. */
   slot: string;
 }
 

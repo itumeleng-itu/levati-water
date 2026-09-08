@@ -5,7 +5,7 @@ bottled water coolers, mains-fed coolers, reverse osmosis systems, and
 branded retail water. Brochure-style site: no cart or checkout, just
 rentals, installs, and free-trial bookings.
 
-This repository is affiliated with [levatiwater.com](https://levatiwater.com).
+This repository is not affiliated with [levatiwater.com](https://levatiwater.com).
 
 ## Running it
 

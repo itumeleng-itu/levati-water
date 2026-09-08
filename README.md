@@ -1,84 +1,45 @@
 # Levati Water
 
-A rebuild of [levatiwater.com](https://levatiwater.com) — a South African drinking-water
-company (bottled water coolers, mains-fed coolers, reverse osmosis systems, branded retail
-water). Next.js 15 App Router site, brochure-style: no cart or checkout, just rentals,
-installs, and free-trial bookings.
+A Next.js web app for Levati Water, a South African drinking-water company —
+bottled water coolers, mains-fed coolers, reverse osmosis systems, and
+branded retail water. Brochure-style site: no cart or checkout, just
+rentals, installs, and free-trial bookings.
 
-See [`CLAUDE.md`](./CLAUDE.md) for the project's non-negotiables (mobile-first, WCAG 2.2 AA,
-motion budget, performance budget, POPIA, SEO redirects) and content rules (South African
-English, no invented facts). See [`docs/BUILD-SPEC.md`](./docs/BUILD-SPEC.md) for the full
-design system and page-by-page spec.
+This repository is affiliated with [levatiwater.com](https://levatiwater.com).
 
-## Stack
-
-- Next.js 15 (App Router) + TypeScript strict
-- Tailwind CSS v4 — tokens live in `app/globals.css`
-- React Hook Form + Zod, posting to Next route handlers
-- Resend (email) + Cloudflare Turnstile (spam protection)
-- Radix UI primitives (Dialog, Accordion) for Sheet/Accordion — everything else hand-rolled
-
-## Getting started
+## Running it
 
 ```bash
 npm install
-cp .env.local.example .env.local   # fill in what you need — see below
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Scripts
+Other commands: `npm run build` (production build), `npm run start` (serve
+a production build), `npm run lint`, `npm run typecheck`.
 
-| Command | Does |
+> Don't run `npm run build` while `npm run dev` is running in the same
+> folder — they write to the `.next` build cache at the same time and can
+> corrupt it. If a page suddenly errors after doing that, stop the dev
+> server, delete the `.next` folder, and restart.
+
+## Configuring variables
+
+Copy `.env.local.example` to `.env.local`. Every page runs and renders fine
+with no variables set — they're only needed for the free-trial and contact
+forms to verify a real submission and send an email.
+
+| Variable | Purpose |
 | --- | --- |
-| `npm run dev` | Local dev server |
-| `npm run build` | Production build |
-| `npm run start` | Serve a production build |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | `tsc --noEmit` |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile site key (client-side widget) |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile secret key (server-side verification) |
+| `RESEND_API_KEY` | Resend API key, for sending lead emails |
+| `RESEND_FROM_EMAIL` | Sending address — its domain must be verified in Resend first |
+| `LEADS_TO_EMAIL` | Where free-trial/contact form submissions are sent |
+| `NEXT_PUBLIC_SITE_URL` | Site origin used in `sitemap.xml`/`robots.txt`; defaults to `https://levatiwater.com` if unset |
 
-> Don't run `npm run build` while `npm run dev` is also pointed at the same `.next`
-> directory — the two write to it concurrently and corrupt the build cache (surfaces as
-> `ENOENT .next/server/app/page.js` or `__webpack_modules__[moduleId] is not a function`).
-> If that happens: stop the dev server, `rm -rf .next`, restart.
-
-## Environment variables
-
-Copy `.env.local.example` to `.env.local` and fill in what you need. `.env.local` is
-gitignored — never commit real keys.
-
-| Variable | Required for | Notes |
-| --- | --- | --- |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | The free-trial and contact forms to render a working CAPTCHA | Without it, the form shows "Turnstile is not configured" **and submission is blocked** — Zod requires a non-empty token, which never gets set. Get both keys at [dash.cloudflare.com](https://dash.cloudflare.com/) → Turnstile. |
-| `TURNSTILE_SECRET_KEY` | Server-side verification of that token | Same place as above. Without it, verification always fails even if the widget renders. |
-| `RESEND_API_KEY` | Actually sending lead emails | [resend.com](https://resend.com) |
-| `RESEND_FROM_EMAIL` | Same | Domain must be verified in the Resend dashboard before mail sends |
-| `LEADS_TO_EMAIL` | Same | Where free-trial/contact submissions land |
-| `NEXT_PUBLIC_SITE_URL` | Correct URLs in `sitemap.xml` / `robots.txt` | Defaults to `https://levatiwater.com` if unset — see `lib/site.ts` |
-
-None of the above are required to run or demo the site — every page renders fine without
-them. They only matter once the free-trial/contact forms need to actually verify a
-real human and deliver a real email. Until then, "Turnstile is not configured" on those
-forms is expected, not a bug. When that day comes: set the Turnstile and Resend variables
-on the hosting platform itself (its dashboard's environment variables — `.env.local`
-never leaves your machine).
-
-## Deployment
-
-`CLAUDE.md` targets Cloudflare Pages (the Johannesburg edge PoP matters for South African
-traffic). In practice this project has also been deployed via Netlify — whichever platform
-you use, set every environment variable above in its dashboard, not just locally.
-
-## Project structure
-
-```
-app/            Routes (App Router) — one folder per page
-components/     UI (ui/), layout (layout/), page sections (content/), forms (forms/)
-lib/            Products/FAQ content, validation schemas, email sending, site config
-docs/           BUILD-SPEC.md (design system + page specs), IMAGES.md
-public/images/  Client-supplied photography — see READY_SLOTS in components/ui/image-placeholder.tsx
-```
-
-Product/FAQ copy in `lib/` is written to trace back to the client's original site content —
-see the content rules in `CLAUDE.md` before adding or changing anything factual.
+Until the Turnstile variables are set, the forms show "Turnstile is not
+configured" and submission is disabled — that's expected, not a bug. Set
+these on whichever platform hosts the site (its own environment-variable
+settings), not just locally — `.env.local` never leaves your machine.

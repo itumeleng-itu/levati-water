@@ -151,9 +151,11 @@ function ContactForm() {
       {siteKey ? (
         <Turnstile siteKey={siteKey} onVerify={onVerify} onExpire={() => setValue("turnstileToken", "")} />
       ) : (
-        <p className="text-small text-ink-600">
-          Turnstile is not configured — set NEXT_PUBLIC_TURNSTILE_SITE_KEY in .env.local.
-        </p>
+        // Dev-facing fallback: NEXT_PUBLIC_TURNSTILE_SITE_KEY isn't set, so
+        // there's no widget to render and no token to produce — see
+        // README.md's "Configuring variables". A real site visitor should
+        // never see an env var name, so this stays generic.
+        <p className="text-small text-ink-600">Spam verification is currently unavailable.</p>
       )}
       {errors.turnstileToken && (
         <p role="alert" className="flex items-center gap-1.5 text-small text-error">
